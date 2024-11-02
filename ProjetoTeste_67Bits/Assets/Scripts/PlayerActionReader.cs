@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +8,9 @@ public class PlayerActionReader : MonoBehaviour
     //For Movement
     public delegate void PlayerMove(Vector3 movementVector);
     public event PlayerMove OnPlayerMove;
+
+    public delegate void PlayerStopped();
+    public event PlayerStopped OnPlayerStoppedMoving;
 
     //For Punching
     public delegate void PlayerPunch();
@@ -31,7 +32,10 @@ public class PlayerActionReader : MonoBehaviour
         Vector2 movementInput = _playerInputActions.Player.Movement.ReadValue<Vector2>();
 
         if (movementInput == Vector2.zero)
+        {
+            OnPlayerStoppedMoving?.Invoke();
             return;
+        }
 
         OnPlayerMove?.Invoke(new Vector3(movementInput.x, 0, movementInput.y));
     }

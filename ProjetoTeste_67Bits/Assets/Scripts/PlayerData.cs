@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "New Player Data", menuName = "Player Data")]
 public class PlayerData : ScriptableObject
 {
-    public float Speed = 1f;
-    public float RotationSpeed = 1f;
+    public float Speed = 300f;
+    public float RotationSpeed = 10f;
     public float Strength = 10f;
 }
