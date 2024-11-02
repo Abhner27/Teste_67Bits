@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector3 movementInput)
     {
-        _player.PlayerRigidbody.velocity = _player.PlayerData.Speed * Time.deltaTime * movementInput;
+        _player.PlayerRigidbody.velocity = 
+            _player.PlayerData.Speed * Time.deltaTime * movementInput;
     }
 
     private void OnDestroy()

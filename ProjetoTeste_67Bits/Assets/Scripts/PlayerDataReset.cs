@@ -30,7 +30,7 @@ public class PlayerDataReset : MonoBehaviour
     {
         //At the end, reset the values
         _playerData.Speed = _initialSpeed;
-        _playerData.Speed = _initialRotationSpeed;
+        _playerData.RotationSpeed = _initialRotationSpeed;
         _playerData.Strength = _initialStrength;
     }
 }
