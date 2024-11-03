@@ -60,7 +60,7 @@ public class CollectEnemiesEffects : MonoBehaviour
         //Go back to the original scale!
         _fillerSprite.transform.localScale = initialScale;
 
-        //set active to false
+        //Set active state to false
         _fillerSprite.SetActive(false);
     }
 

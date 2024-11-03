@@ -44,7 +44,13 @@ public class PlayerPunch : MonoBehaviour
     }
 }
 
-public class DestroyInimigos : MonoBehaviour
+public class PlayerLevelUp : MonoBehaviour
 {
+    //Aplly buffs!
+}
 
+public class PlayerLevelUpEffects : MonoBehaviour
+{
+    //Change Sprite color!
+    //increase scale?
 }

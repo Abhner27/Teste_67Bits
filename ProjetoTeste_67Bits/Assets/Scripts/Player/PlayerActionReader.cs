@@ -16,6 +16,10 @@ public class PlayerActionReader : MonoBehaviour
     public delegate void PlayerPunch();
     public event PlayerPunch OnPlayerPunch;
 
+    //For Buying XP
+    public delegate void PlayerBuy();
+    public event PlayerBuy OnPlayerBuy;
+
     private void Awake()
     {
         //Initialize
@@ -24,6 +28,7 @@ public class PlayerActionReader : MonoBehaviour
 
         //Introduce the punch read at the performed phase
         _playerInputActions.Player.Punch.performed += Punch;
+        _playerInputActions.Player.Buy.performed += Buy;
     }
 
     //Movement input is checked every single Fixed Update!
@@ -49,8 +54,17 @@ public class PlayerActionReader : MonoBehaviour
         }
     }
 
+    private void Buy(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnPlayerBuy?.Invoke();
+        }
+    }
+
     private void OnDestroy()
     {
         _playerInputActions.Player.Punch.performed -= Punch;
+        _playerInputActions.Player.Buy.performed -= Buy;
     }
 }

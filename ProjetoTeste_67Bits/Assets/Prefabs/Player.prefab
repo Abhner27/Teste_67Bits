@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5230110747941500394}
   - component: {fileID: 4327582802041820756}
   - component: {fileID: 1565719951960225953}
+  - component: {fileID: 6753331482455824592}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -187,6 +188,20 @@ MonoBehaviour:
   _followPlayerSpeed: 0.5
   _windWobbleSpeed: 0.3
   _windWobbleOscilation: 0.25
+--- !u!114 &6753331482455824592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881852309171059475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdca7d0ef57a0a478b67c08e70141c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _money: {fileID: 0}
+  _experience: {fileID: 0}
 --- !u!1 &1834683927965690905
 GameObject:
   m_ObjectHideFlags: 0
