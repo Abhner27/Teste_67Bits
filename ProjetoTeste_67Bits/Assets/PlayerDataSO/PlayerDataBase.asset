@@ -16,3 +16,4 @@ MonoBehaviour:
   RotationSpeed: 10
   Strength: 100
   Punch_Range: 2
+  MaxAmountToPile: 10
