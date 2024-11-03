@@ -41,11 +41,16 @@ public class PlayerActionReader : MonoBehaviour
     }
 
     //Punch is called by a UI button or other InputActions in the Player Input actionMap
-    public void Punch(InputAction.CallbackContext context)
+    private void Punch(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             OnPlayerPunch?.Invoke();
         }
+    }
+
+    private void OnDestroy()
+    {
+        _playerInputActions.Player.Punch.performed -= Punch;
     }
 }
