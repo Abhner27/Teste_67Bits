@@ -913,6 +913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 837695251}
   - component: {fileID: 837695252}
+  - component: {fileID: 837695253}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -980,13 +981,26 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
+  m_DrawMode: 0
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &837695253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837695250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6073591b5249f4ab5ab8e40d5036df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySpawner: {fileID: 1858569457}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1422,7 @@ GameObject:
   - component: {fileID: 1858569454}
   - component: {fileID: 1858569455}
   - component: {fileID: 1858569456}
+  - component: {fileID: 1858569457}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -1493,6 +1508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f587cb29d248b48a1cf0abd2fbef5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deadEnemyPrefab: {fileID: 7117442754676826552, guid: 50bf5a52a774f9544a1b9278382be97e, type: 3}
 --- !u!65 &1858569456
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1514,6 +1530,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 3, z: 1}
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &1858569457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858569451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadb220e59848794087b3f8c18c53bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1954500446
 GameObject:
   m_ObjectHideFlags: 3
@@ -1864,36 +1892,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 881852309171059475, guid: 95c1a8912757125429d5181d56011114, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6418981283900325681}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95c1a8912757125429d5181d56011114, type: 3}
---- !u!1 &6418981283900325671 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 881852309171059475, guid: 95c1a8912757125429d5181d56011114, type: 3}
-  m_PrefabInstance: {fileID: 6418981283900325670}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6418981283900325675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4611590493023361672, guid: 95c1a8912757125429d5181d56011114, type: 3}
   m_PrefabInstance: {fileID: 6418981283900325670}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6418981283900325681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6418981283900325671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ace23ee1b652c148a9c9425760c977e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -16,12 +16,12 @@ public class PlayerAnimations : MonoBehaviour
         _playerActionReader = GetComponentInParent<Player>().PlayerActionReader;
         _animator = GetComponent<Animator>();
 
-        _playerActionReader.OnPlayerMove += RunAnimation;
+        _playerActionReader.OnPlayerMove += PlayRunAnimation;
         _playerActionReader.OnPlayerStoppedMoving += StopRunAnimation;
         _playerActionReader.OnPlayerPunch += PunchAnimation;
     }
 
-    private void RunAnimation(Vector3 movementInput)
+    private void PlayRunAnimation(Vector3 movementInput)
     {
         if (_isMoving == true)
             return;
@@ -48,7 +48,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private void OnDestroy()
     {
-        _playerActionReader.OnPlayerMove -= RunAnimation;
+        _playerActionReader.OnPlayerMove -= PlayRunAnimation;
         _playerActionReader.OnPlayerStoppedMoving -= StopRunAnimation;
         _playerActionReader.OnPlayerPunch -= PunchAnimation;
     }

@@ -5,6 +5,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject _deadEnemyPrefab;
 
+    public delegate void EnemyCooldown();
+    public event EnemyCooldown EnemyCooldownEvent;
+
     public void Die(Vector3 force)
     {
         //Instantiate a ragdoll
@@ -15,27 +18,11 @@ public class Enemy : MonoBehaviour
         rb.AddForce(force, ForceMode.Impulse);
 
         //This enemy spawner goes to cooldown!
-
+        EnemyCooldownEvent?.Invoke();
 
         //Eliminate this enemy (set the active state to false) - GC isn't called
         gameObject.SetActive(false);
     }
-}
 
-public class EnemySpawner : MonoBehaviour
-{
-    private void Start()
-    {
-        
-    }
-
-    private async void Cooldown()
-    {
-
-    }
-
-    private void OnDestroy()
-    {
-        
-    }
+    public void GetActive() => gameObject.SetActive(true);
 }

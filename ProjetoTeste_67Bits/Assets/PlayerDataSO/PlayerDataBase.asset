@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 300
   RotationSpeed: 10
-  Strength: 1
+  Strength: 100
   Punch_Range: 2
