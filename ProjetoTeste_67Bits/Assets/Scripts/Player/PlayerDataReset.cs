@@ -14,6 +14,7 @@ public class PlayerDataReset : MonoBehaviour
     private float _initialRotationSpeed;
     private float _initialStrength;
     private float _initialPunchRange;
+    private int _maxAmountToPile;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class PlayerDataReset : MonoBehaviour
         _initialRotationSpeed = _playerData.RotationSpeed;
         _initialStrength = _playerData.Strength;
         _initialPunchRange = _playerData.Punch_Range;
+        _maxAmountToPile = _playerData.MaxAmountToPile;
     }
 
     private void OnDestroy()
@@ -35,5 +37,6 @@ public class PlayerDataReset : MonoBehaviour
         _playerData.RotationSpeed = _initialRotationSpeed;
         _playerData.Strength = _initialStrength;
         _playerData.Punch_Range = _initialPunchRange;
+        _playerData.MaxAmountToPile = _maxAmountToPile;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemySpawner : MonoBehaviour
 {
-    private const float COOLDOWN_TIME = 10f;
+    private const float COOLDOWN_TIME = 2f;
 
     private Enemy _enemy;
 
