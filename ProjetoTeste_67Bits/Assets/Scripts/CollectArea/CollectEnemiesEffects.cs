@@ -40,6 +40,9 @@ public class CollectEnemiesEffects : MonoBehaviour
 
         void ProgressChanged(object sender, float value) //value will increase from 0 to 1.
         {
+            if (cancellationTokenSource.IsCancellationRequested)
+                return;
+
             value *= _maximum;
 
             _fillerSprite.transform.localScale = new Vector3(value, value, 1);

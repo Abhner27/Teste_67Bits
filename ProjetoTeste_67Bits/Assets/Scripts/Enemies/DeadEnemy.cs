@@ -1,32 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeadEnemy : MonoBehaviour
 {
+    //Lifetime of this gameobject. - Necessary so it don't flood the scene!
     private const float DURATION_TIME = 30f;
-    private const float COLLECT_ACTIVATION_TIME = 0.5f;
 
-    private BoxCollider _boxCollider;
+    //Time before player can start to collect this enemy to its pile!
+    private const float COLLECT_ACTIVATION_TIME = 1f;
+
+    private bool _canBeCollected = false;
+    public bool CanBeCollected { get => _canBeCollected; private set { } }
 
     private async void Start()
     {
-        _boxCollider = GetComponent<BoxCollider>();
-        _boxCollider.enabled = false;
+        //Start lifetime timer
+        Destroy(gameObject, DURATION_TIME);
 
+        //Wait for activating the collection trigger
         await CustomTimeManager.WaitForGameTime(COLLECT_ACTIVATION_TIME);
 
-        _boxCollider.enabled = true;
-        Destroy(gameObject, DURATION_TIME);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            //Debug.Log("Coletado!");
-            other.GetComponent<PlayerPile>().AddToPile();
-            Destroy(gameObject);
-        }
+        //Allow collection!
+        _canBeCollected = true;
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 300
   RotationSpeed: 10
-  Strength: 100
+  Strength: 200
   Punch_Range: 2
   MaxAmountToPile: 3

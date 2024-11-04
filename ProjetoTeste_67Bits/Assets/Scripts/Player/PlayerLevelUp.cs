@@ -11,7 +11,6 @@ public class PlayerLevelUp : MonoBehaviour
     [SerializeField]
     private SkinnedMeshRenderer _skinnedMeshRenderer;
 
-
     private void Start()
     {
         _player = GetComponent<Player>();
@@ -21,11 +20,13 @@ public class PlayerLevelUp : MonoBehaviour
 
     private void LevelUp()
     {
+        //Aplly buffs!
         _player.PlayerData.Speed += 25f;
         _player.PlayerData.Strength += 50f;
         _player.PlayerData.Punch_Range += 0.1f;
-        _player.PlayerData.MaxAmountToPile += 2;
+        _player.PlayerData.MaxAmountToPile += 1;
 
+        //Change player color and scale!
         _skinnedMeshRenderer.material.color = Random.ColorHSV();
         transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
     }
