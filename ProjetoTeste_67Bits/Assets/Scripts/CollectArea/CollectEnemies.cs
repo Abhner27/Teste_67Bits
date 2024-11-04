@@ -9,9 +9,6 @@ public class CollectEnemies : MonoBehaviour
     private PlayerPile _playerPile;
     private bool _playerIsInside;
 
-    [SerializeField]
-    private GameObject _shopUI;
-
     public delegate void CooldownStart(
         float time,
         CancellationTokenSource cancellationTokenSource,
@@ -31,7 +28,6 @@ public class CollectEnemies : MonoBehaviour
             return;
 
         _playerIsInside = true;
-        _shopUI.SetActive(true);
         CollectOperation();
     }
 
@@ -41,7 +37,6 @@ public class CollectEnemies : MonoBehaviour
             return;
 
         _playerIsInside = false;
-        _shopUI.SetActive(false);
         _cancellationTokenSource.Cancel();
     }
 
@@ -62,5 +57,24 @@ public class CollectEnemies : MonoBehaviour
         //If nt cancelled, clean the pile!
         if (!_cancellationTokenSource.IsCancellationRequested)
             _playerPile.CleanPile();
+    }
+
+    private void OnDestroy()
+    {
+        _cancellationTokenSource.Cancel();
+    }
+}
+
+public class ShopUITrigger : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject _shopUI;
+    private void OnTriggerEnter(Collider collider)
+    {
+        _shopUI.SetActive(true);
+    }
+    private void OnTriggerExit(Collider collider)
+    {
+        _shopUI.SetActive(false);
     }
 }

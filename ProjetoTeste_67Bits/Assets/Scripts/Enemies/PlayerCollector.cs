@@ -2,7 +2,7 @@
 
 public class PlayerCollector : MonoBehaviour
 {
-    private const float CHECK_INTERVAL = 0.5f; // Interval between checks
+    private const float CHECK_INTERVAL = 0.1f; // Interval between checks
     private const float COLLECT_DISTANCE = 2f; // Distance of the collect area
 
     private void Start()

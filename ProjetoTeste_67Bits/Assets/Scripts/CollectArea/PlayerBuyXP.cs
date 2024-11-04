@@ -20,7 +20,6 @@ public class PlayerBuyXP : MonoBehaviour
         _player.PlayerActionReader.OnPlayerBuy += Buy;
     }
 
-
     //Buy experience points, gain buffs at level up!
     private void Buy()
     {
