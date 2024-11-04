@@ -120,6 +120,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &520809012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 881852309171059475, guid: 95c1a8912757125429d5181d56011114, type: 3}
+  m_PrefabInstance: {fileID: 6418981283900325670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642588136
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +682,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: -446.19327, y: -446.19327, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 916296739}
@@ -1096,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e511d06d6ada54ca3e6ba520a50933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shopUI: {fileID: 0}
+  _shopUI: {fileID: 1770149642}
 --- !u!114 &916296741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,6 +1707,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307324287}
   m_CullTransparentMesh: 1
+--- !u!137 &1368354403 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2675764619266666787, guid: 95c1a8912757125429d5181d56011114, type: 3}
+  m_PrefabInstance: {fileID: 6418981283900325670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1381968266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,7 +2178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1770149643
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2645,16 +2655,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6753331482455824592, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: _money
+      value: 
+      objectReference: {fileID: 725164097}
+    - target: {fileID: 6753331482455824592, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: _experience
+      value: 
+      objectReference: {fileID: 1392045597}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 881852309171059475, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6418981283900325686}
   m_SourcePrefab: {fileID: 100100000, guid: 95c1a8912757125429d5181d56011114, type: 3}
 --- !u!4 &6418981283900325675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4611590493023361672, guid: 95c1a8912757125429d5181d56011114, type: 3}
   m_PrefabInstance: {fileID: 6418981283900325670}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6418981283900325686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520809012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cf3e9e194a90f4e8ffecf8ca7a24bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _experience: {fileID: 1392045597}
+  _skinnedMeshRenderer: {fileID: 1368354403}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

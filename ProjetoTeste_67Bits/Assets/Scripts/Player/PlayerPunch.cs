@@ -43,14 +43,3 @@ public class PlayerPunch : MonoBehaviour
         _player.PlayerActionReader.OnPlayerPunch -= Punch;
     }
 }
-
-public class PlayerLevelUp : MonoBehaviour
-{
-    //Aplly buffs!
-}
-
-public class PlayerLevelUpEffects : MonoBehaviour
-{
-    //Change Sprite color!
-    //increase scale?
-}
