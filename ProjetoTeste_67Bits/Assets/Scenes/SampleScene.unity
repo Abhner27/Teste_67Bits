@@ -3576,6 +3576,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.shakesDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.useMainCamera
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.shakeStrength.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.shakeStrength.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.shakeStrength.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: cameraShake.cameras.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353887186749608323, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: 'cameraShake.cameras.Array.data[0]'
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 4611590493023361672, guid: 95c1a8912757125429d5181d56011114, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

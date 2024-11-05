@@ -11,7 +11,6 @@ public class PlayerCollector : MonoBehaviour
     private void Start()
     {
         CheckForDeadEnemies();
-        FindFirstObjectByType<Money>().Add(10000);
     }
 
     private async void CheckForDeadEnemies()
@@ -20,8 +19,6 @@ public class PlayerCollector : MonoBehaviour
         {
             //Use OverlapSphere to detect dead enemies nearby
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, COLLECT_DISTANCE, _deadEnemiesLayer);
-
-            Debug.Log(hitColliders.Length);
 
             foreach (var hitCollider in hitColliders)
             {
