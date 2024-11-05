@@ -15,6 +15,9 @@ public class PlayerLevelUp : MonoBehaviour
     {
         _player = GetComponent<Player>();
 
+        if (_experience == null)
+            _experience = FindFirstObjectByType<Experience>();
+
         _experience.OnLevelUp += LevelUp;
     }
 
@@ -28,7 +31,7 @@ public class PlayerLevelUp : MonoBehaviour
 
         //Change player color and scale!
         _skinnedMeshRenderer.material.color = Random.ColorHSV();
-        transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+        _player.GraphicsTransform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     private void OnDestroy()

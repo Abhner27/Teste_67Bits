@@ -13,4 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody _playerRigidbody;
     public Rigidbody PlayerRigidbody { get => _playerRigidbody; private set { } }
+
+    [SerializeField]
+    private Transform _graphicsTransform;
+    public Transform GraphicsTransform { get => _graphicsTransform; private set { } }
 }
