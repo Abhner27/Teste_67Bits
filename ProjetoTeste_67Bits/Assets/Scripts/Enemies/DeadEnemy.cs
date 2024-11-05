@@ -6,7 +6,7 @@ public class DeadEnemy : MonoBehaviour
     private const float DURATION_TIME = 30f;
 
     //Time before player can start to collect this enemy to its pile!
-    private const float COLLECT_ACTIVATION_TIME = 1f;
+    private const float COLLECT_ACTIVATION_TIME = 0.5f;
 
     private bool _canBeCollected = false;
     public bool CanBeCollected { get => _canBeCollected; private set { } }

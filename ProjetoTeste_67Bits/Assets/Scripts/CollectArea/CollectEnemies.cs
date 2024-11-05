@@ -1,80 +1,154 @@
 using System.Threading;
+using System.Threading.Tasks;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CollectArea))]
 public class CollectEnemies : MonoBehaviour
 {
-    private const float COOLDOWN_TIME = 3f;
+    private CollectArea _collectArea;
+    private PlayerPile _playerPile; //Reference to clear the player pile
 
-    private PlayerPile _playerPile;
-    private bool _playerIsInside;
+    private CooldownHandler _cooldownHandler;
+    public CooldownHandler CooldownHandler { get => _cooldownHandler; private set { } }
 
-    public delegate void CooldownStart(
-        float time,
-        CancellationTokenSource cancellationTokenSource,
-        Progress<float> progress);
-    public event CooldownStart OnCooldownStart;
+    CancellationTokenSource _cancellationTokenSource;
 
-    private CancellationTokenSource _cancellationTokenSource;
-
-    private void OnTriggerEnter(Collider collider)
+    private void Awake()
     {
-        if (_playerIsInside)
-            return;
+        _collectArea = GetComponent<CollectArea>();
+        _playerPile = FindFirstObjectByType<PlayerPile>();
 
-        _playerPile = collider.GetComponent<PlayerPile>();
+        _cooldownHandler = new CooldownHandler(3f);
 
+        _collectArea.OnEnter += PlayerEnter;
+        _collectArea.OnExit += PlayerExit;
+    }
+
+    private void PlayerEnter()
+    {
         if (_playerPile.Pile.Count == 0)
             return;
 
-        _playerIsInside = true;
         CollectOperation();
     }
 
-    private void OnTriggerExit(Collider collider)
+    private void PlayerExit()
     {
-        if (!_playerIsInside)
+        if (_cancellationTokenSource == null)
             return;
 
-        _playerIsInside = false;
-        _cancellationTokenSource.Cancel();
+        try
+        {
+            _cancellationTokenSource.Cancel();
+        }
+        catch (ObjectDisposedException)
+        {
+            Debug.Log("O CancellationTokenSource foi disposed.");
+        }
     }
 
     private async void CollectOperation()
     {
-        // Create a CancellationTokenSource to cancel the cooldown effect if necessary
-        _cancellationTokenSource = new CancellationTokenSource();
+        using (_cancellationTokenSource = new CancellationTokenSource())
+        {
+            await _cooldownHandler.StartCooldownAsync(_cancellationTokenSource);
 
-        // Progress of the cooldown (from 0 to 1)
-        Progress<float> progress = new Progress<float>();
+            if (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                _playerPile.CleanPile();
+            }
 
-        //Invoke CooldownEvent
-        OnCooldownStart?.Invoke(COOLDOWN_TIME, _cancellationTokenSource, progress);
-
-        //Wait for cooldown
-        await CustomTimeManager.WaitForGameTime(COOLDOWN_TIME, _cancellationTokenSource.Token, progress);
-
-        //If nt cancelled, clean the pile!
-        if (!_cancellationTokenSource.IsCancellationRequested)
-            _playerPile.CleanPile();
+            _cancellationTokenSource.Dispose();
+        }
     }
 
     private void OnDestroy()
     {
-        _cancellationTokenSource.Cancel();
+        _collectArea.OnEnter -= PlayerEnter;
+        _collectArea.OnExit -= PlayerExit;
     }
 }
 
-public class ShopUITrigger : MonoBehaviour
+public class CooldownHandler
 {
-    [SerializeField]
-    private GameObject _shopUI;
-    private void OnTriggerEnter(Collider collider)
+    private readonly float _cooldownTime;
+
+    public delegate Task CooldownDelegate(float time,
+        CancellationTokenSource cancellationTokenSource,
+        Progress<float> progress);
+
+    public event CooldownDelegate OnCooldownStart;
+
+    public CooldownHandler(float cooldownTime)
     {
-        _shopUI.SetActive(true);
+        _cooldownTime = cooldownTime;
     }
-    private void OnTriggerExit(Collider collider)
+
+    public async Task StartCooldownAsync(CancellationTokenSource cancellationTokenSource)
     {
-        _shopUI.SetActive(false);
+        Progress<float> progress = new Progress<float>();
+        OnCooldownStart?.Invoke(_cooldownTime, cancellationTokenSource, progress);
+
+        await CustomTimeManager.WaitForGameTime(_cooldownTime, cancellationTokenSource.Token, progress);
     }
+}
+
+public abstract class CooldownHandlerEffectBase<T> : MonoBehaviour where T : Component
+{
+    [SerializeField] 
+    protected T _targetComponent; //The component of which the implementer requires
+
+    protected float _maximumScale; //The scale multiplier base number
+    protected Vector3 _initialScale;
+
+    protected virtual void Awake()
+    {
+        if (_targetComponent == null)
+            _targetComponent = GetComponent<T>();
+    }
+
+    public async Task StartCooldownEffect(
+        float time,
+        CancellationTokenSource cancellationTokenSource,
+        Progress<float> progress)
+    {
+        OnEffectStart();
+
+        progress.ProgressChanged += ProgressChanged;
+
+        void ProgressChanged(object sender, float value)
+        {
+            if (cancellationTokenSource.IsCancellationRequested)
+                return;
+
+            ApplyProgressEffect(value);
+        }
+
+        try
+        {
+            await CustomTimeManager.WaitForGameTime(time, cancellationTokenSource.Token, progress);
+        }
+        catch (TaskCanceledException)
+        {
+            Debug.Log("Cooldown canceled.");
+        }
+
+        progress.ProgressChanged -=  ProgressChanged;
+
+        OnEffectEnd();
+    }
+
+    private void ApplyProgressEffect(float progressValue)
+    {
+        //progressValue will go from 0f to 1f.
+        float scaledValue = progressValue * _maximumScale;
+
+        //Do some more logic if needed!
+        ApplyAdditionalEffect(scaledValue);
+    }
+
+    protected abstract void OnEffectStart(); //Called ate the start of the progress
+    protected abstract void ApplyAdditionalEffect(float scaledValue); //Called during progress
+    protected abstract void OnEffectEnd(); //Called ate the end of the progress
 }

@@ -3,7 +3,10 @@
 public class PlayerCollector : MonoBehaviour
 {
     private const float CHECK_INTERVAL = 0.1f; // Interval between checks
-    private const float COLLECT_DISTANCE = 2f; // Distance of the collect area
+    private const float COLLECT_DISTANCE = 1f; // Distance of the collect area
+
+    [SerializeField]
+    private LayerMask _deadEnemiesLayer;
 
     private void Start()
     {
@@ -15,7 +18,7 @@ public class PlayerCollector : MonoBehaviour
         while (true)
         {
             //Use OverlapSphere to detect dead enemies nearby
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, COLLECT_DISTANCE);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, COLLECT_DISTANCE, _deadEnemiesLayer);
 
             foreach (var hitCollider in hitColliders)
             {

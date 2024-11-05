@@ -1,10 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class EnemySpawnerEffect : MonoBehaviour
+public class EnemySpawnerEffect : CooldownHandlerEffectBase<SpriteRenderer>
 {
     //At cooldown, it changes the ring sprite color!
     //And starts an animation going from (0, 0, 1) to (0.5, 0.5, 1)
@@ -12,66 +9,39 @@ public class EnemySpawnerEffect : MonoBehaviour
     [SerializeField]
     private EnemySpawner _enemySpawner;
 
-    private SpriteRenderer _spriteRenderer;
-
-    //the Maximum value of the scale
-    private float _maximum;
-
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _maximumScale = transform.localScale.x; //It could also be = transform.localScale.y
 
-        _enemySpawner.OnCooldownStart += Cooldown;
+        _enemySpawner.CooldownHandler.OnCooldownStart += StartCooldownEffect;
     }
 
-    private async void Cooldown(float time, CancellationTokenSource cancellationTokenSource, Progress<float> progress)
+    protected override void OnEffectStart()
     {
-        //Get the initial scale
-        Vector3 initialScale = transform.localScale;
+        //Gets the initial scale
+        _initialScale = transform.localScale;
 
-        //Reset the localScale to start the cooldown
+        //Update it
         transform.localScale = new Vector3(0, 0, 1);
 
         //Change the color
-        _spriteRenderer.color = Color.black;
+        _targetComponent.color = Color.black;
+    }
 
-        // Progress will increase the localScale
-        progress.ProgressChanged += ProgressChanged;
+    protected override void ApplyAdditionalEffect(float scaledValue)
+    {
+        //Update the scale on the x and y axis
+        transform.localScale = new Vector3(scaledValue, scaledValue, 1);
+    }
 
-        //Gets the Maximum value (the biggest it will get at x and y)
-        _maximum = initialScale.x;
-
-        void ProgressChanged(object sender, float value) //value will increase from 0 to 1.
-        {
-            if (cancellationTokenSource.IsCancellationRequested)
-                return;
-
-            value *= _maximum;
-
-            transform.localScale = new Vector3(value, value, 1);
-        }
-
-        // Try to wait... if canceled, Debug it!
-        try
-        {
-            await CustomTimeManager.WaitForGameTime(time, cancellationTokenSource.Token, progress);
-        }
-        catch (TaskCanceledException)
-        {
-            Debug.Log("Cooldown canceled.");
-        }
-
-        progress.ProgressChanged -= ProgressChanged;
-
-        //Change back the color
-        _spriteRenderer.color = Color.white;
-
-        //Go back to the original scale!
-        transform.localScale = initialScale;
+    protected override void OnEffectEnd()
+    {
+        _targetComponent.color = Color.white;
+        transform.localScale = _initialScale;
     }
 
     private void OnDestroy()
     {
-        _enemySpawner.OnCooldownStart -= Cooldown;
+        _enemySpawner.CooldownHandler.OnCooldownStart -= StartCooldownEffect;
     }
 }

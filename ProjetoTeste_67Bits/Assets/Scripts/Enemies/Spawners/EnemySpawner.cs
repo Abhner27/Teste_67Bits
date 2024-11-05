@@ -5,40 +5,33 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemySpawner : MonoBehaviour
 {
-    private const float COOLDOWN_TIME = 2f;
-
     private Enemy _enemy;
 
-    public delegate void CooldownStart(
-        float time, 
-        CancellationTokenSource cancellationTokenSource, 
-        Progress<float> progress);
+    private CooldownHandler _cooldownHandler;
+    public CooldownHandler CooldownHandler { get => _cooldownHandler; private set { } }
 
-    public event CooldownStart OnCooldownStart;
+    private CancellationTokenSource _cancellationTokenSource;
 
-    private void Start()
+    private void Awake()
     {
         _enemy = GetComponent<Enemy>();
+
+        _cooldownHandler = new CooldownHandler(2f);
 
         _enemy.EnemyCooldownEvent += Cooldown;
     }
 
     private async void Cooldown()
     {
-        // Create a CancellationTokenSource to cancel the cooldown effect if necessary
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        using (_cancellationTokenSource = new CancellationTokenSource())
+        {
+            await _cooldownHandler.StartCooldownAsync(_cancellationTokenSource);
 
-        // Progress of the cooldown (from 0 to 1)
-        Progress<float> progress = new Progress<float>();
-
-        //Invoke CooldownEvent
-        OnCooldownStart?.Invoke(COOLDOWN_TIME, cancellationTokenSource, progress);
-
-        //Wait for cooldown
-        await CustomTimeManager.WaitForGameTime(COOLDOWN_TIME, cancellationTokenSource.Token, progress);
-
-        //Set enemy back to active!
-        _enemy.GetActive();
+            if (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                _enemy.GetActive();
+            }
+        }
     }
 
     private void OnDestroy()
