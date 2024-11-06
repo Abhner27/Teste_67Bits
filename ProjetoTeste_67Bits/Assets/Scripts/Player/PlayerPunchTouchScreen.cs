@@ -3,9 +3,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerPunchTouchScreen : PunchAction
 {
-    private const float CHECK_DISTANCE = 1f;
+    private const float CHECK_DISTANCE = 0.5f;
+
+    [SerializeField]
+    private Camera _camera;
 
     public override event Hit OnHit;
+
+    private void Awake()
+    {
+        if (_camera == null)
+            _camera = Camera.main;
+    }
 
     protected override void Punch()
     {
@@ -17,7 +26,7 @@ public class PlayerPunchTouchScreen : PunchAction
         Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
 
         //Make it to world point 
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, Camera.main.nearClipPlane));
+        Vector3 worldPosition = _camera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, _camera.nearClipPlane));
 
         //check player distance to the click.position. (if it is bigger than player range, return)
         if (Vector3.Distance(transform.position, worldPosition) > _player.PlayerData.Punch_Range)
