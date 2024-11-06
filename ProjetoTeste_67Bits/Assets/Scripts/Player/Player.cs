@@ -17,4 +17,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform _graphicsTransform;
     public Transform GraphicsTransform { get => _graphicsTransform; private set { } }
+
+    private void OnValidate()
+    {
+        if (_playerActionReader == null)
+            _playerActionReader = gameObject.AddComponent<PlayerActionReader>();
+
+        if (_playerRigidbody == null)
+        {
+            _playerRigidbody = gameObject.AddComponent<Rigidbody>();
+            _playerRigidbody.drag = 10f;
+            _playerRigidbody.angularDrag = 10f;
+            _playerRigidbody.useGravity = false;
+        }
+    }
 }

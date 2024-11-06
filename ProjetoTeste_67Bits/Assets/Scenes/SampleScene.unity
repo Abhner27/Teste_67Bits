@@ -3612,6 +3612,22 @@ PrefabInstance:
       propertyPath: 'cameraShake.cameras.Array.data[0]'
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 1565719951960225953, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: _distanceBetweenItensInPile.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565719951960225953, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: _distanceBetweenItensInPile.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789236680661811804, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327582802041820756, guid: 95c1a8912757125429d5181d56011114, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4611590493023361672, guid: 95c1a8912757125429d5181d56011114, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

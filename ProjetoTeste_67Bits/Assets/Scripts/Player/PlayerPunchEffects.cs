@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(PlayerPunch))]
+[RequireComponent(typeof(PunchAction))]
 public class PlayerPunchEffects : MonoBehaviour
 {
-    private PlayerPunch _playerPunch;
+    private PunchAction _playerPunch;
 
     //Play some particles at the hit!
     [SerializeField]

@@ -3,7 +3,7 @@ using UnityEngine;
 public class DeadEnemy : MonoBehaviour
 {
     //Lifetime of this gameobject. - Necessary so it don't flood the scene!
-    private const float DURATION_TIME = 30f;
+    private const float DURATION_TIME = 20f;
 
     //Time before player can start to collect this enemy to its pile!
     private const float COLLECT_ACTIVATION_TIME = 0.5f;

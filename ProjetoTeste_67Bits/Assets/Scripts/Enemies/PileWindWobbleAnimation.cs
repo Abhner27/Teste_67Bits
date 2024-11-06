@@ -30,7 +30,7 @@ public class PileWindWobbleAnimation : MonoBehaviour
     {
         float pingPong = Mathf.PingPong(Time.time * _windWobbleSpeed, _windWobbleOscilation);
 
-        return new Vector3(pingPong, 0f, -pingPong);
+        return new Vector3(pingPong, 0f, 0f);
     }
 
     private void OnDisable()

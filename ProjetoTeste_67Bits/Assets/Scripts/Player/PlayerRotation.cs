@@ -30,6 +30,11 @@ public class PlayerRotation : MonoBehaviour
             _player.PlayerData.RotationSpeed * Time.deltaTime);
     }
 
+    public void LookAt(Vector3 point)
+    {
+        transform.rotation = Quaternion.LookRotation(point);
+    }
+
     private void OnDestroy()
     {
         _player.PlayerActionReader.OnPlayerMove -= Rotate;

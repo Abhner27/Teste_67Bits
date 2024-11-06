@@ -1,23 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerPunch : MonoBehaviour
+public class PlayerPunch : PunchAction
 {
-    private Player _player;
+    public override event Hit OnHit;
 
-    [SerializeField] 
-    private LayerMask _enemyLayer;
-
-    public delegate void Hit();
-    public event Hit OnHit;
-
-    private void Start()
-    {
-        _player = GetComponent<Player>();
-
-        _player.PlayerActionReader.OnPlayerPunch += Punch;
-    }
-
-    private void Punch()
+    protected override void Punch()
     {
         RaycastHit hit;
         float radius = 0.5f;
@@ -47,10 +34,5 @@ public class PlayerPunch : MonoBehaviour
                 enemy.Die(force);
             }
         }
-    }
-
-    private void OnDestroy()
-    {
-        _player.PlayerActionReader.OnPlayerPunch -= Punch;
     }
 }

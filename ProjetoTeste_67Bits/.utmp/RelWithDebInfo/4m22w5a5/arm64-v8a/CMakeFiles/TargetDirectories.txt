@@ -1,0 +1,5 @@
+C:/Users/1555 MX7/Documents/GitHub/Projeto_67Bits/Teste_67Bits/ProjetoTeste_67Bits/.utmp/RelWithDebInfo/4m22w5a5/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/1555 MX7/Documents/GitHub/Projeto_67Bits/Teste_67Bits/ProjetoTeste_67Bits/.utmp/RelWithDebInfo/4m22w5a5/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/1555 MX7/Documents/GitHub/Projeto_67Bits/Teste_67Bits/ProjetoTeste_67Bits/.utmp/RelWithDebInfo/4m22w5a5/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Users/1555 MX7/Documents/GitHub/Projeto_67Bits/Teste_67Bits/ProjetoTeste_67Bits/.utmp/RelWithDebInfo/4m22w5a5/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Users/1555 MX7/Documents/GitHub/Projeto_67Bits/Teste_67Bits/ProjetoTeste_67Bits/.utmp/RelWithDebInfo/4m22w5a5/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

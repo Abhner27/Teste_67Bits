@@ -47,6 +47,7 @@ public class PlayerPile : MonoBehaviour
     private void Start()
     {
         _player = GetComponent<Player>();
+        FindFirstObjectByType<Money>().Add(10000);
     }
 
     public bool AddToPile()
@@ -126,6 +127,8 @@ public class PlayerPile : MonoBehaviour
 
         for (int i = 1; i < _pile.Count; i++)
         {
+            float heightRate = 1f + (i / 10f);
+
             Vector3 pos = _pile[i - 1].position
                 + (_pile[i - 1].right * _distanceBetweenItensInPile.x)
                 + (_pile[i - 1].up * _distanceBetweenItensInPile.y)
@@ -133,8 +136,15 @@ public class PlayerPile : MonoBehaviour
 
             pos += _offset;
 
-            _pile[i].position = Vector3.Lerp(_pile[i].position, pos, _followPlayerSpeed/i);
-            _pile[i].rotation = Quaternion.Lerp(_pile[i].rotation, _pile[i - 1].rotation, _followPlayerSpeed);
+            _pile[i].position = Vector3.Lerp(_pile[i].position, pos, _followPlayerSpeed / heightRate);
+
+            Vector3 direction = _pile[i - 1].position - _pile[i].position;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            rotation = Quaternion.Euler(new Vector3(rotation.eulerAngles.x - 90f,
+                _pile[i - 1].rotation.eulerAngles.y,
+                rotation.eulerAngles.z));
+
+            _pile[i].rotation = Quaternion.Lerp(_pile[i].rotation, rotation, _followPlayerSpeed / heightRate);
         }
     }
 }
