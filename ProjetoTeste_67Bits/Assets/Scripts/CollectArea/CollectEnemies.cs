@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CollectArea))]
 public class CollectEnemies : MonoBehaviour
 {
+    private const float COOLDOWN_TIME = 2f;
+
     private CollectArea _collectArea;
     private PlayerPile _playerPile; //Reference to clear the player pile
 
@@ -18,7 +20,7 @@ public class CollectEnemies : MonoBehaviour
         _collectArea = GetComponent<CollectArea>();
         _playerPile = FindFirstObjectByType<PlayerPile>();
 
-        _cooldownHandler = new CooldownHandler(3f);
+        _cooldownHandler = new CooldownHandler(COOLDOWN_TIME);
 
         _collectArea.OnEnter += PlayerEnter;
         _collectArea.OnExit += PlayerExit;

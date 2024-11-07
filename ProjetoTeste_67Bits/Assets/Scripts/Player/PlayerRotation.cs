@@ -14,7 +14,7 @@ public class PlayerRotation : MonoBehaviour
         _player.PlayerActionReader.OnPlayerMove += Rotate;
     }
 
-    private void Rotate(Vector3 movementInput)
+    public void Rotate(Vector3 movementInput)
     {
         //Get the target rotation
         Quaternion targetRotation = Quaternion.LookRotation(movementInput);
@@ -28,11 +28,6 @@ public class PlayerRotation : MonoBehaviour
             _player.PlayerRigidbody.rotation,
             targetRotation,
             _player.PlayerData.RotationSpeed * Time.deltaTime);
-    }
-
-    public void LookAt(Vector3 point)
-    {
-        transform.rotation = Quaternion.LookRotation(point);
     }
 
     private void OnDestroy()

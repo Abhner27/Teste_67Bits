@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
         _player.PlayerActionReader.OnPlayerMove += Move;
     }
 
-    private void Move(Vector3 movementInput)
+    public void Move(Vector3 movementInput)
     {
         _player.PlayerRigidbody.velocity = 
             _player.PlayerData.Speed * Time.deltaTime * movementInput;

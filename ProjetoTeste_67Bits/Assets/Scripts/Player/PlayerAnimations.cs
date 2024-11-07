@@ -7,6 +7,7 @@ public class PlayerAnimations : MonoBehaviour
     private const string PUNCH_TRIGGER = "Punch";
 
     private PlayerActionReader _playerActionReader;
+    private PlayerInteraction _playerInteraction;
     private Animator _animator;
 
     private bool _isMoving = false;
@@ -14,11 +15,14 @@ public class PlayerAnimations : MonoBehaviour
     private void Start()
     {
         _playerActionReader = GetComponentInParent<Player>().PlayerActionReader;
+        _playerInteraction = GetComponentInParent<PlayerInteraction>();
+
         _animator = GetComponent<Animator>();
 
         _playerActionReader.OnPlayerMove += PlayRunAnimation;
         _playerActionReader.OnPlayerStoppedMoving += StopRunAnimation;
         _playerActionReader.OnPlayerPunch += PunchAnimation;
+        _playerInteraction.OnPlayerSuccessfullInteraction += InteractAnimation;
     }
 
     private void PlayRunAnimation(Vector3 movementInput)
@@ -46,10 +50,16 @@ public class PlayerAnimations : MonoBehaviour
         _animator.SetTrigger(PUNCH_TRIGGER);
     }
 
+    private void InteractAnimation()
+    {
+        _animator.SetTrigger(PUNCH_TRIGGER);
+    }
+
     private void OnDestroy()
     {
         _playerActionReader.OnPlayerMove -= PlayRunAnimation;
         _playerActionReader.OnPlayerStoppedMoving -= StopRunAnimation;
         _playerActionReader.OnPlayerPunch -= PunchAnimation;
+        _playerInteraction.OnPlayerSuccessfullInteraction -= InteractAnimation;
     }
 }

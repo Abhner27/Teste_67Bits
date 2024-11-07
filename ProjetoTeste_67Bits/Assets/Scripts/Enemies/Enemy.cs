@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private GameObject _deadEnemyPrefab;
@@ -25,4 +25,14 @@ public class Enemy : MonoBehaviour
     }
 
     public void GetActive() => gameObject.SetActive(true);
+
+    public void Interact(Player player)
+    {
+        PlayerPunchBySelection playerPunch = player.GetComponent<PlayerPunchBySelection>();
+
+        if (playerPunch == null)
+            return;
+
+        playerPunch.SelectEnemy(this);
+    }
 }

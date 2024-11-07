@@ -20,6 +20,10 @@ public class PlayerActionReader : MonoBehaviour
     public delegate void PlayerBuy();
     public event PlayerBuy OnPlayerBuy;
 
+    //For Interacting
+    public delegate void PlayerInteract(Vector2 pos);
+    public event PlayerInteract OnPlayerInteract;
+
     private void Awake()
     {
         //Initialize
@@ -34,6 +38,7 @@ public class PlayerActionReader : MonoBehaviour
     //Movement input is checked every single Fixed Update!
     private void FixedUpdate()
     {
+        //Movement
         Vector2 movementInput = _playerInputActions.Player.Movement.ReadValue<Vector2>();
 
         if (movementInput == Vector2.zero)
@@ -43,6 +48,11 @@ public class PlayerActionReader : MonoBehaviour
         }
 
         OnPlayerMove?.Invoke(new Vector3(movementInput.x, 0, movementInput.y));
+    }
+
+    private void Update()
+    {
+        Interact();
     }
 
     //Punch is called by a UI button or other InputActions in the Player Input actionMap
@@ -59,6 +69,17 @@ public class PlayerActionReader : MonoBehaviour
         if (context.performed)
         {
             OnPlayerBuy?.Invoke();
+        }
+    }
+
+    private void Interact()
+    {
+        if ((Touchscreen.current != null && Touchscreen.current.press.wasPressedThisFrame) |
+            (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame))
+        {
+            Vector2 pos = _playerInputActions.Player.Interact.ReadValue<Vector2>();
+
+            OnPlayerInteract?.Invoke(pos);
         }
     }
 
