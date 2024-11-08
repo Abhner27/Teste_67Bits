@@ -28,4 +28,6 @@ O projeto inclui duas opções de UI: uma UI dinâmica (semelhante ao jogo Gym B
 
 ### Como Rodar o Projeto
 Para rodar o projeto, clone o repositório e abra-o no Unity. Certifique-se de estar utilizando uma versão compatível (Unity 2023 ou superior).
-De preferencia, use a versão 2023.1.15f1
+De preferência, use a versão 2023.1.15f1
+
+### [Vídeo](https://drive.google.com/file/d/17qhqXtXnA6-KG_vfmx9SfWO5YjNm-Caw/view?usp=sharing)
